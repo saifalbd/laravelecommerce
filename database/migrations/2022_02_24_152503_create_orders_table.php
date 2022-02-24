@@ -29,6 +29,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->integer('quantity');
             $table->integer('rate');
+            $table->foreignId('product_id')->constrained('products')->onDelete('restrict')->onUpdate('restrict');
             $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete()->onUpdate('restrict');
             $table->timestamps();
             $table->softDeletes();
@@ -38,7 +39,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->integer('quantity');
             $table->bigInteger('amount');
-            $table->foreignId('buyer_id')->constrained('users')->restrictOnDelete()->restrictOnUpdate();
+            $table->foreignId('seller_id')->constrained('users')->restrictOnDelete()->restrictOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -48,6 +49,7 @@ class CreateOrdersTable extends Migration
             $table->integer('quantity');
             $table->integer('rate');
             $table->foreignId('purchase_id')->constrained('purchases')->cascadeOnDelete()->onUpdate('restrict');
+            $table->foreignId('product_id')->constrained('products')->onDelete('restrict')->onUpdate('restrict');
             $table->foreignId('storage_id');
             $table->timestamps();
             $table->softDeletes();

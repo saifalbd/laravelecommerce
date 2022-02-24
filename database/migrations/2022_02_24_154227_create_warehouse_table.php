@@ -24,6 +24,7 @@ class CreateWarehouseTable extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained('product_oppenings')->onDelete('restrict')->onUpdate('restrict');
             $table->foreignId('warehouse_id')->constrained();
+            $table->integer('quantity');
             $table->timestamps();
             $table->softDeletes();
         });
