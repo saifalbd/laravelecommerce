@@ -13,4 +13,14 @@ class Category extends Model
 
 
 
+    public function subCategories(){
+        return $this->hasMany(static::class,'parent_id');
+    }
+
+    public function parent(){
+        return $this->belongsTo(self::class,'parent_id');
+    }
+
+
+
 }

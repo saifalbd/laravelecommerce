@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
 
         Schema::create('product_oppenings', function (Blueprint $table) {
             $table->id();
-            $table->string('quantity')->unique();
+            $table->integer('quantity');
             $table->double('rate');
             $table->timestamps();
         });

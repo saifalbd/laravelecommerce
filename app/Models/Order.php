@@ -12,7 +12,7 @@ class Order extends Model
     protected $fillable = ['quantity','amount','buyer_id','status','address'];
 
 
-    public function products(){
+    public function items(){
         return $this->hasMany(OrderProduct::class);
     }
 

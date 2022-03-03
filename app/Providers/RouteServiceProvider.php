@@ -2,7 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Purchase;
+use App\Models\User;
+use App\Models\Warehouse;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -32,10 +38,23 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
+            Route::prefix('admin')
+                ->name('admin.')
+                ->middleware('api')
+                ->group(base_path('routes/admin.php'));
+
             Route::prefix('api')
+                ->name('api.')
                 ->middleware('api')
                 ->group(base_path('routes/api.php'));
         });
+
+
+        Route::bind('category',Category::class);
+        Route::bind('product',Product::class);
+        Route::bind('warehouse',Warehouse::class);
+        Route::bind('purchase',Purchase::class);
+        Route::bind('user',User::class);
     }
 
     /**

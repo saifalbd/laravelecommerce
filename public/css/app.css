@@ -1,0 +1,80 @@
+:root {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+}
+#app * {
+  box-sizing: border-box;
+}
+#app > header {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid black;
+}
+#app > header > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#app > header > div > div {
+  margin: 0 10px;
+}
+#app > header > div > div button {
+  outline: none;
+  border: 1px solid burlywood;
+  padding: 5px 10px;
+  text-transform: capitalize;
+}
+#app > header .logo-box img {
+  height: 40px;
+}
+#app > header .user-avater {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+#app > header .user-avater img {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+#app .sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#app .sidebar ul {
+  margin: 0;
+  list-style-type: none;
+  padding: 0 5px;
+}
+#app .sidebar ul li {
+  line-height: 2.5rem;
+  border-bottom: 1px solid silver;
+}
+#app .sidebar ul li:last-child {
+  border-bottom: none;
+}
+#app main {
+  background-color: gold;
+  min-height: calc(100vh - 50px);
+}
+#app footer {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  background-color: rebeccapurple;
+}
