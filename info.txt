@@ -1,0 +1,6 @@
+deploy korear age
+composer install --optimize-autoloader --no-dev
+er por abar kaj korar somy
+composer install --optimize-autoloader
+or
+composer dump-autoload
