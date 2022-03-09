@@ -1,0 +1,26 @@
+button,
+.btn,
+input[type="submit"] {
+    text-decoration: none;
+    outline: none;
+    padding: 5px 15px;
+    color: black;
+    border: 1px solid goldenrod;
+    height: 40px;
+    font-size: 1.1rem;
+
+    justify-content: space-around;
+    align-items: center;
+    width: auto;
+    &.small {
+        height: 32px;
+        font-size: 1rem;
+        padding: 3px 8px;
+    }
+}
+
+.top-title-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,20 +20,23 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
         <header>
             <div>
                 <div class="logo-box">
-                    <img src="https://i.picsum.photos/id/828/200/200.jpg?hmac=XDYHUvU1Ha9LQrkNk3svII_91vwnQqo8C0yWMqCt6V8" alt="" srcset="">
+                    <img src="https://i.picsum.photos/id/828/200/200.jpg?hmac=XDYHUvU1Ha9LQrkNk3svII_91vwnQqo8C0yWMqCt6V8"
+                        alt="" srcset="">
                 </div>
                 <div>
                     <h4>company Logo</h4>
                 </div>
             </div>
             <div>
-                <div  class="user-avater">
-                    <img src="https://i.picsum.photos/id/828/200/200.jpg?hmac=XDYHUvU1Ha9LQrkNk3svII_91vwnQqo8C0yWMqCt6V8" alt="" srcset="">
+                <div class="user-avater">
+                    <img src="https://i.picsum.photos/id/828/200/200.jpg?hmac=XDYHUvU1Ha9LQrkNk3svII_91vwnQqo8C0yWMqCt6V8"
+                        alt="" srcset="">
                     <strong>User Name</strong>
                 </div>
                 <div>
@@ -44,15 +48,8 @@
 
             </div>
         </header>
-        <div class="sidebar">
-            <ul>
+        <x-admin.sidebar></x-admin.sidebar>
 
-
-           @foreach (collect()->times(12)->toArray() as $menu)
-           <li>menu-{{$menu}}</li>
-           @endforeach
-        </ul>
-        </div>
         <main class="py-4">
             @yield('content')
         </main>
@@ -61,4 +58,5 @@
         </footer>
     </div>
 </body>
+
 </html>

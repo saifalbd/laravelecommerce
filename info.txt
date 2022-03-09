@@ -4,3 +4,10 @@ er por abar kaj korar somy
 composer install --optimize-autoloader
 or
 composer dump-autoload
+
+
+php artisan make:Controller Admin/UserController -r
+php artisan make:Controller Admin/UnitController -r
+php artisan make:Controller Admin/WarehouseController -r
+php artisan make:Controller Admin/ProductController -r
+

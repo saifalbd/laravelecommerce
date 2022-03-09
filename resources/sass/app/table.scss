@@ -1,0 +1,24 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    &.list-items {
+        th,
+        td {
+            padding: 5px 5px;
+            text-align: left;
+        }
+        thead {
+            tr {
+                background-color: silver;
+            }
+        }
+        tbody {
+            tr {
+                border-bottom: 1px solid dimgrey;
+                &:hover {
+                    background-color: silver;
+                }
+            }
+        }
+    }
+}

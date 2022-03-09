@@ -1,3 +1,31 @@
+button,
+.btn,
+input[type=submit] {
+  text-decoration: none;
+  outline: none;
+  padding: 5px 15px;
+  color: black;
+  border: 1px solid goldenrod;
+  height: 40px;
+  font-size: 1.1rem;
+  justify-content: space-around;
+  align-items: center;
+  width: auto;
+}
+button.small,
+.btn.small,
+input[type=submit].small {
+  height: 32px;
+  font-size: 1rem;
+  padding: 3px 8px;
+}
+
+.top-title-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 :root {
   font-size: 16px;
 }
@@ -66,15 +94,54 @@ body {
   line-height: 2.5rem;
   border-bottom: 1px solid silver;
 }
+#app .sidebar ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.1rem;
+  display: block;
+  width: calc(100% - 2px);
+  line-height: 2.4rem;
+}
+#app .sidebar ul li:hover {
+  background-color: antiquewhite;
+}
 #app .sidebar ul li:last-child {
   border-bottom: none;
 }
 #app main {
-  background-color: gold;
   min-height: calc(100vh - 50px);
+}
+#app main .bardump {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 5px;
+  text-transform: capitalize;
+}
+#app main .bardump a {
+  text-decoration: none;
+  font-size: 1.1rem;
 }
 #app footer {
   grid-column-start: 1;
   grid-column-end: 3;
   background-color: rebeccapurple;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+table.list-items th,
+table.list-items td {
+  padding: 5px 5px;
+  text-align: left;
+}
+table.list-items thead tr {
+  background-color: silver;
+}
+table.list-items tbody tr {
+  border-bottom: 1px solid dimgrey;
+}
+table.list-items tbody tr:hover {
+  background-color: silver;
 }

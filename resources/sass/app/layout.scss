@@ -1,17 +1,17 @@
-:root{
+:root {
     font-size: 16px;
 }
-body{
+body {
     margin: 0;
     padding: 0;
 }
-#app{
+#app {
     display: grid;
     grid-template-columns: 250px 1fr;
-    *{
+    * {
         box-sizing: border-box;
     }
-    >header{
+    > header {
         grid-column-start: 1;
         grid-column-end: 3;
         height: 50px;
@@ -19,13 +19,13 @@ body{
         justify-content: space-between;
         align-items: center;
         border-bottom: 2px solid black;
-        >div{
+        > div {
             display: flex;
             justify-content: center;
             align-items: center;
-            >div{
+            > div {
                 margin: 0 10px;
-                button{
+                button {
                     outline: none;
                     border: 1px solid burlywood;
                     padding: 5px 10px;
@@ -33,56 +33,75 @@ body{
                 }
             }
         }
-        .logo-box{
-            img{
+        .logo-box {
+            img {
                 height: 40px;
             }
         }
-        .user-avater{
+        .user-avater {
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            img{
+            img {
                 height: 40px;
-            width: 40px;
-            border-radius: 100%;
-            overflow: hidden;
+                width: 40px;
+                border-radius: 100%;
+                overflow: hidden;
             }
         }
     }
 
-    .sidebar{
+    .sidebar {
         // min-height: calc(100vh - 50px);
 
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        ul{margin: 0; list-style-type: none;
+        ul {
+            margin: 0;
+            list-style-type: none;
             padding: 0 5px;
-          li{
-            line-height:2.5rem;
-            border-bottom: 1px solid silver;
-            &:last-child{
-                border-bottom: none;
+            li {
+                line-height: 2.5rem;
+                border-bottom: 1px solid silver;
+                a {
+                    text-decoration: none;
+                    color: black;
+                    font-size: 1.1rem;
+                    display: block;
+                    width: calc(100% - 2px);
+                    line-height: 2.4rem;
+                }
+                &:hover {
+                    background-color: antiquewhite;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                > ul {
+                }
             }
+        }
+        ul {
+        }
+    }
+    main {
+        min-height: calc(100vh - 50px);
+        .bardump {
+            list-style-type: none;
 
-
-            >ul{
-
+            margin: 0;
+            padding: 0 5px;
+            text-transform: capitalize;
+            a {
+                text-decoration: none;
+                font-size: 1.1rem;
             }
-          }
         }
-        ul{
-
-        }
-
     }
-    main{
-background-color: gold;
-min-height: calc(100vh - 50px);
-    }
-    footer{
+    footer {
         grid-column-start: 1;
         grid-column-end: 3;
         background-color: rebeccapurple;
