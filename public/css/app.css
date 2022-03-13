@@ -145,3 +145,37 @@ table.list-items tbody tr {
 table.list-items tbody tr:hover {
   background-color: silver;
 }
+
+.form-layout form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.form-layout .input-group {
+  margin-top: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.form-layout .input-group label {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+.form-layout .input-group .input {
+  line-height: 30px;
+  height: 30px;
+  border: 1px solid black;
+  outline: none;
+}
+.form-layout .input-group .input.is-invalid {
+  border: 1px solid red;
+}
+.form-layout .input-group .input:focus {
+  outline: none;
+}
+.form-layout .input-group small {
+  color: red;
+}
+.form-layout .input-group.is-half {
+  width: calc(50% - 5px);
+}

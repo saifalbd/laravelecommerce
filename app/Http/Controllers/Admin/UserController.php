@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+
+    public array $userTypes = ['Support','Vendor','User'];
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +31,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.User.create');
+        $types = $this->userTypes;
+        return view('admin.User.create',compact('types'));
     }
 
     /**
@@ -37,7 +43,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>['required','string'],
+            'email'=>['required','email','unique:users,email'],
+            'password'=>['required','string','min:8'],
+            'type'=>['required',Rule::in($this->userTypes)],
+        ]);
+        $data = $request->only('name','email');
+        $password = Hash::make($request->password);
+        $has = Str::lower($request->type);
+
+        $data = array_merge($request->only('name','email'),compact('password','has'));
+
+        User::create($data);
+
+        return redirect()->route('admin.user.index')->with('success','SuccessFully Saved User');
     }
 
     /**
@@ -59,7 +79,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.User.edit',compact('user'));
+           $types = $this->userTypes;
+        return view('admin.User.edit',compact('user','types'));
     }
 
     /**
@@ -71,7 +92,26 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+        'name'=>['required','string'],
+        'email'=>['required','email',Rule::unique('users','email')->whereNot('email',$user->email)],
+        'password'=>['nullable','string','min:8'],
+        'type'=>['required',Rule::in($this->userTypes)],
+        ]);
+
+          $data = $request->only('name','email');
+          $has = Str::lower($request->type);
+          $data = array_merge($request->only('name','email'),compact('has'));
+
+          if($request->password){
+            $password = Hash::make($request->password);
+            $data['password'] = $password;
+          }
+
+          $user->update($data);
+
+            return redirect()->route('admin.user.index')->with('success','SuccessFully Saved User');
+
     }
 
     /**
@@ -82,6 +122,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+         return redirect()->back()->with('success','SuccessFully Saved User');
     }
 }

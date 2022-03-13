@@ -1,0 +1,35 @@
+.form-layout {
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .input-group {
+        margin-top: 5px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        label {
+            text-transform: capitalize;
+            font-weight: bold;
+        }
+        .input {
+            line-height: 30px;
+            height: 30px;
+            border: 1px solid black;
+            outline: none;
+            &.is-invalid {
+                border: 1px solid red;
+            }
+            &:focus {
+                outline: none;
+            }
+        }
+        small {
+            color: red;
+        }
+        &.is-half {
+            width: calc(50% - 5px);
+        }
+    }
+}

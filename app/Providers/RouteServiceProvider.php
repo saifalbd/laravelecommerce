@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::prefix('admin')
                 ->name('admin.')
-                ->middleware('api')
+                ->middleware('web')
                 ->group(base_path('routes/admin.php'));
 
             Route::prefix('api')
@@ -50,11 +50,11 @@ class RouteServiceProvider extends ServiceProvider
         });
 
 
-        Route::bind('category',Category::class);
-        Route::bind('product',Product::class);
-        Route::bind('warehouse',Warehouse::class);
-        Route::bind('purchase',Purchase::class);
-        Route::bind('user',User::class);
+        Route::model('category',Category::class);
+         Route::model('product',Product::class);
+     Route::model('warehouse',Warehouse::class);
+     Route::model('purchase',Purchase::class);
+      Route::model('user',User::class);
     }
 
     /**
