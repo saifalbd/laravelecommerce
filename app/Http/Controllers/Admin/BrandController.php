@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Warehouse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
-class WarehouseController extends Controller
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        $warehouses = Warehouse::query()->get();
-        return view('admin.Warehouse.index',compact('warehouses'));
+   
     }
 
     /**
@@ -27,7 +24,7 @@ class WarehouseController extends Controller
      */
     public function create()
     {
-        return view('admin.Warehouse.create');
+        //
     }
 
     /**
@@ -38,13 +35,7 @@ class WarehouseController extends Controller
      */
     public function store(Request $request)
     {
-    $request->validate([
-        'title'=>['required','string']
-    ]);
-
-    $title = $request->title;
-    Warehouse::create(compact('title'));
-    return redirect()->route('admin.warehouse.index');
+        //
     }
 
     /**
@@ -64,9 +55,9 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Warehouse $warehouse)
+    public function edit($id)
     {
-               return view('admin.Warehouse.edit',compact('warehouse'));
+        //
     }
 
     /**
@@ -76,15 +67,9 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Warehouse $warehouse)
+    public function update(Request $request, $id)
     {
-           $request->validate([
-           'title'=>['required','string']
-           ]);
-
-           $title = $request->title;
-           $warehouse->update(compact('title'));
-           return redirect()->route('admin.warehouse.index');
+        //
     }
 
     /**
@@ -93,9 +78,8 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Warehouse $warehouse)
+    public function destroy($id)
     {
-        $warehouse->delete();
-           return redirect()->route('admin.warehouse.index');
+        //
     }
 }

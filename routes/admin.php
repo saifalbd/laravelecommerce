@@ -1,7 +1,10 @@
 <?php
 
 // use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Admin\{WereHouseController,UserController,ProductController};
+use App\Http\Controllers\Admin\{WarehouseController,CategoryController,UserController,
+  PurchaseController,
+  UnitController,
+  ProductController};
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -13,5 +16,6 @@ use Illuminate\Support\Facades\Route;
  Route::resource('/users',UserController::class)->names('user');
    Route::resource('/products',ProductController::class)->names('product');
    Route::resource('/categories',CategoryController::class)->names('category');
-   Route::resource('/purchases',CategoryController::class)->names('purchase');
-   Route::resource('/warehouse',WereHouseController::class)->names('warehouse');
+   Route::resource('/purchases',PurchaseController::class)->names('purchase');
+   Route::resource('/warehouse',WarehouseController::class)->names('warehouse');
+      Route::resource('/units',UnitController::class)->names('unit');

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UnitController extends Controller
 {
@@ -14,7 +16,8 @@ class UnitController extends Controller
      */
     public function index()
     {
-        //
+        $units = Unit::query()->get();
+        return view('admin.Unit.index',compact('units'));
     }
 
     /**
@@ -24,7 +27,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        //
+          return view('admin.Unit.create');
     }
 
     /**
@@ -35,7 +38,13 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+      'title'=>['required','string',Rule::unique('units','title')],
+      'sort_title'=>['required','string',Rule::unique('units','title')],
+      ]);
+
+        Unit::create($request->only('title','sort_title'));
+        return redirect()->route('admin.unit.index');
     }
 
     /**
@@ -44,9 +53,9 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Unit $unit)
     {
-        //
+
     }
 
     /**
@@ -55,9 +64,9 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Unit $unit)
     {
-        //
+              return view('admin.unit.edit',compact('unit'));
     }
 
     /**
@@ -67,9 +76,15 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Unit $unit)
     {
-        //
+            $request->validate([
+            'title'=>['required','string',Rule::unique('units','title')->whereNot('title',$unit->title)],
+            'sort_title'=>['required','string',Rule::unique('units','title')->whereNot('title',$unit->title)],
+            ]);
+
+            $unit->update($request->only('title','sort_title'));
+            return redirect()->route('admin.unit.index');
     }
 
     /**
@@ -78,8 +93,10 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Unit $unit)
     {
-        //
+      
+        $unit->delete();
+           return redirect()->route('admin.unit.index');
     }
 }

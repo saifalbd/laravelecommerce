@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Warehouse;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
-class WarehouseController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        $warehouses = Warehouse::query()->get();
-        return view('admin.Warehouse.index',compact('warehouses'));
+        $categories = Category::query()->get();
+        return view('admin.Category.index',compact('categories'));
     }
 
     /**
@@ -27,7 +26,8 @@ class WarehouseController extends Controller
      */
     public function create()
     {
-        return view('admin.Warehouse.create');
+        $parents = Category::query()->select(['id','title'])->get();
+        return view('admin.Category.create',compact('parents'));
     }
 
     /**
@@ -38,13 +38,16 @@ class WarehouseController extends Controller
      */
     public function store(Request $request)
     {
-    $request->validate([
-        'title'=>['required','string']
-    ]);
 
-    $title = $request->title;
-    Warehouse::create(compact('title'));
-    return redirect()->route('admin.warehouse.index');
+   
+        $request->validate([
+            'title'=>['required','string'],
+            'parent_id'=>['nullable','numeric','exists:categories,id']
+        ]);
+
+        Category::create($request->only('title','parent_id'));
+
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -64,9 +67,11 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Warehouse $warehouse)
+    public function edit(Category $category)
     {
-               return view('admin.Warehouse.edit',compact('warehouse'));
+        $parents = Category::query()->where('id',"!=",$category->id)->select(['id','title'])->get();
+
+        return view('admin.Category.edit',compact('category','parents'));
     }
 
     /**
@@ -76,15 +81,16 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Warehouse $warehouse)
+    public function update(Request $request, Category $category)
     {
-           $request->validate([
-           'title'=>['required','string']
-           ]);
 
-           $title = $request->title;
-           $warehouse->update(compact('title'));
-           return redirect()->route('admin.warehouse.index');
+       
+         $request->validate([
+         'title'=>['required','string'],
+         'parent_id'=>['nullable','numeric','exists:categories,id']
+         ]);
+        $category->update($request->only('title','parent_id'));
+            return redirect()->route('admin.category.index');
     }
 
     /**
@@ -93,9 +99,9 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Warehouse $warehouse)
+    public function destroy( Category $category)
     {
-        $warehouse->delete();
-           return redirect()->route('admin.warehouse.index');
+   $category->delete();
+      return redirect()->route('admin.category.index');
     }
 }

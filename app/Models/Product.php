@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','slug','rate','description','sku','vendor_id','opening_id','category_id'];
+    protected $fillable = ['title','slug','rate','description','sku','vendor_id','unit_id','opening_id','category_id'];
 
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+
+    public function unit(){
+        return $this->belongsTo(Unit::class,'unit_id');
     }
 
     public function vendor(){
@@ -20,6 +24,16 @@ class Product extends Model
 
     public function opening(){
         return $this->belongsTo(ProductOpening::class,'opening_id');
+    }
+
+    public function storage(){
+        return $this->hasMany(ProductStorage::class,'product_id');
+    }
+
+
+    public function getStockQunatityAttribute()
+    {
+        return $this->storage->sum('quantity');
     }
 
 

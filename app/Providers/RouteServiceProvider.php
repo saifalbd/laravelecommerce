@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\Unit;
 use App\Models\User;
 use App\Models\Warehouse;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -55,6 +56,7 @@ class RouteServiceProvider extends ServiceProvider
      Route::model('warehouse',Warehouse::class);
      Route::model('purchase',Purchase::class);
       Route::model('user',User::class);
+     Route::model('unit',Unit::class);
     }
 
     /**

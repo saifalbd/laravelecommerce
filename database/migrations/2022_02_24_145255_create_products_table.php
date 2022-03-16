@@ -14,6 +14,15 @@ class CreateProductsTable extends Migration
     public function up()
     {
 
+        Schema::create('units', function (Blueprint $table) {
+        $table->id();
+        $table->string('title')->unique();
+        $table->string('sort_title')->unique();
+        $table->timestamps();
+        $table->softDeletes();
+        });
+
+
         Schema::create('product_oppenings', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
@@ -29,6 +38,7 @@ class CreateProductsTable extends Migration
             $table->double('rate');
             $table->bigInteger('sku')->nullable();
             $table->foreignId('vendor_id')->nullable();
+             $table->foreignId('unit_id')->constrained('units')->onDelete('restrict')->onUpdate('restrict');
             $table->foreignId('opening_id')->constrained('product_oppenings')->onDelete('restrict')->onUpdate('restrict');
             $table->foreignId('category_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
@@ -47,8 +57,10 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_oppenings');
+       
         Schema::dropIfExists('products');
+         Schema::dropIfExists('product_oppenings');
+          Schema::dropIfExists('units');
 
     }
 }

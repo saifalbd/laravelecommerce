@@ -20,14 +20,16 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('has')->default('customer');
-            $table->foreignId('image_id');
+            $table->foreignId('image_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
 
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id');
+            //->constrained('users');
+            //->onUpdate('cascade')->onDelete('cascade');
             $table->string('phone')->nullable();
             $table->string('details')->nullable();
             $table->string('house')->nullable();
@@ -44,7 +46,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+       
         Schema::dropIfExists('address');
+         Schema::dropIfExists('users');
     }
 }

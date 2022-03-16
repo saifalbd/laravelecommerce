@@ -9,51 +9,51 @@ class Sidebar extends Component
 
 
     public $menus = [
-        [
-            'title' => 'Deshboard',
-            'url' => '#'
-        ],
+        // [
+        //     'title' => 'Deshboard',
+        //     'url' => '#'
+        // ],
         [
             'title' => 'Users',
-            'url' => '#'
+            'url' => 'admin.user.index'
         ],
-        [
-            'title' => 'Brands',
-            'url' => '#'
-        ],
+        // [
+        //     'title' => 'Brands',
+        //     'url' => 'admin.brand.index'
+        // ],
         [
             'title' => 'Units',
-            'url' => '#'
+            'url' => 'admin.unit.index'
         ],
         [
             'title' => 'Warehouse',
-            'url' => '#'
+            'url' => 'admin.warehouse.index'
         ],
 
         [
             'title' => 'Category',
-            'url' => '#'
+            'url' => 'admin.category.index'
         ],
-        [
-            'title' => 'Bannars',
-            'url' => '#'
-        ],
+        // [
+        //     'title' => 'Bannars',
+        //     'url' => '#'
+        // ],
         [
             'title' => 'Products',
-            'url' => '#'
+            'url' => 'admin.product.index'
         ],
-        [
-            'title' => 'Stocks Reports',
-            'url' => '#'
-        ],
-          [
-          'title' => 'Account Reports',
-          'url' => '#'
-          ],
-           [
-           'title' => 'Setting',
-           'url' => '#'
-           ],
+        // [
+        //     'title' => 'Stocks Reports',
+        //     'url' => '#'
+        // ],
+        //   [
+        //   'title' => 'Account Reports',
+        //   'url' => '#'
+        //   ],
+        //    [
+        //    'title' => 'Setting',
+        //    'url' => '#'
+        //    ],
        
     ];
     /**
