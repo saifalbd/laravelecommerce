@@ -10,7 +10,7 @@ class ProductOpening extends Model
     use HasFactory;
 
     protected $table = 'product_oppenings';
-    protected $fillable = ['quantity','rate'];
+    protected $fillable = ['quantity','rate','warehouse_id'];
 
     public function getAmountAttribute()
     {

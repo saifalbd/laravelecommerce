@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductOpening;
+use App\Models\ProductStorage;
 use App\Models\Unit;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
@@ -59,7 +60,7 @@ class ProductController extends Controller
             'description'=>['nullable','string']
         ]);
 
-        $opening = $request->only(['quantity','rate']);
+        $opening = $request->only(['quantity','rate','warehouse_id']);
        $opening = ProductOpening::create($opening);
 
         $rate = $request->selling_price;
@@ -110,7 +111,8 @@ class ProductController extends Controller
              $warehouses = Warehouse::query()->select(['id','title'])->get();
              $categories = Category::query()->get();
              $units = Unit::query()->get();
-             
+             $product->load('opening');
+            // return $product;
              return view('admin.Product.edit',compact('warehouses','categories','units','product'));
 
     }
@@ -122,9 +124,62 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+
+        $request->validate([
+        'title'=>['required','string'],
+        'category_id'=>['required','numeric','exists:categories,id'],
+        'unit_id'=>['required','numeric','exists:units,id'],
+        'warehouse_id'=>['nullable','numeric','exists:warehouses,id'],
+        'quantity'=>['required','numeric'],
+        'rate'=>['required','numeric'],
+        'selling_price'=>['required','numeric'],
+        'description'=>['nullable','string']
+        ]);
+
+    DB::transaction(function() use($request,$product){
+
+          $opening = $request->only(['quantity','rate','warehouse_id']);
+
+
+          $rate = $request->selling_price;
+          $slug = Str::slug($request->title);
+
+          $productData = array_merge($request->only(['title','category_id','unit_id','description']),
+          compact('rate','slug'));
+
+ 
+
+          $product->update($productData);
+
+          $store= $product->storage->first();
+          $store->decrement('quantity',$product->opening->quantity);
+
+          if($request->warehouse_id){
+          $has = $product->storage()->where('warehouse_id',$request->warehouse_id)->first();
+          if($has){
+          $has->increment('quantity',$request->quantity);
+          }else{
+          $product->storage()->create($request->only(['warehouse_id','quantity',]));
+          }
+          }else{
+          $store->increment('quantity',$request->quantity);
+
+          }
+
+  
+
+
+          $opening = $product->opening()->update($opening);
+
+    });
+     
+
+   return redirect()->route('admin.product.index');
+      
+
+
     }
 
     /**

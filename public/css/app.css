@@ -179,3 +179,31 @@ table.list-items tbody tr:hover {
 .form-layout .input-group.is-half {
   width: calc(50% - 5px);
 }
+
+.purchase-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 63px;
+  grid-gap: 5px;
+  width: calc(100% - 50px);
+  background-color: aliceblue;
+}
+.purchase-row.top {
+  grid-template-columns: 2fr 1fr 1fr;
+}
+.purchase-row .add-remove {
+  display: flex;
+  margin-top: 23px;
+}
+.purchase-row .add-remove button {
+  text-decoration: none;
+  outline: none;
+  padding: 2px 2px;
+  color: black;
+  border: 1px solid goldenrod;
+  height: 30px;
+  font-size: 0.7rem;
+  justify-content: space-around;
+  align-items: center;
+  width: auto;
+  cursor: pointer;
+}

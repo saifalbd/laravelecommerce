@@ -34,14 +34,15 @@ class Sidebar extends Component
             'title' => 'Category',
             'url' => 'admin.category.index'
         ],
-        // [
-        //     'title' => 'Bannars',
-        //     'url' => '#'
-        // ],
+       
         [
             'title' => 'Products',
             'url' => 'admin.product.index'
         ],
+         [
+         'title' => 'Purchase',
+         'url' => 'admin.purchase.index'
+         ],
         // [
         //     'title' => 'Stocks Reports',
         //     'url' => '#'

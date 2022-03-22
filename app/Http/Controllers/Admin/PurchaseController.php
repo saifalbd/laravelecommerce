@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Purchase;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
@@ -14,7 +17,8 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        //
+        $purchases = Purchase::query()->get();
+        return view('admin.Purchase.index',compact('purchases'));
     }
 
     /**
@@ -24,7 +28,9 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::query()->select(['id','title'])->get();
+        $vendors = User::query()->vendor()->select(['id','name','has'])->get();
+        return view('admin.Purchase.create',compact('products','vendors'));
     }
 
     /**
@@ -69,7 +75,7 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    
     }
 
     /**
